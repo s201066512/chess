@@ -1,10 +1,6 @@
 package com.example.c_h_e_s_s;
 
 public class Rook extends Pieces{
-    int maxLeft = row;
-    int maxRight = 7 - row;
-    int maxUp = col;
-    int maxDown = 7 - col;
 
     public Rook(int type, int color, int col, int row) {
         super(3, color, col, row);
@@ -87,5 +83,103 @@ public class Rook extends Pieces{
             }
         }
         return board;
+    }
+    public int[][] validMoves(Pieces[][] board){
+        int[][] moves = new int[8][8];
+
+        // right
+        for (int right = row; right < 7; right++){ // moving right from current column to the edge
+            if (board[col][right] == null){ // if nothing is there it is a valid move
+                moves[col][right] = 1;
+            }
+            else{ // something is there
+                if (board[col][right].getColor() == 0 && color == 1){ // enemy piece
+                    moves[col][right] = 1; // there is a piece which can be captured, so it is a valid move
+                    break; // but you can't go any further, so break
+                }
+                else if (board[col][right].getColor() == 0 && color == 0){ // friendly piece
+                    break; // can't go any further
+                }
+                if (board[col][right].getColor() == 1 && color == 0){
+                    moves[col][right] = 1; // there is a piece which can be captured, so it is a valid move
+                    break; // but you can't go any further, so break
+                }
+                else if (board[col][right].getColor() == 1 && color == 1){
+                    break;
+                }
+            }
+        }
+
+        // left
+        for (int left = row; left > 0; left--){
+            if (board[col][left] == null){ // if nothing is there it is a valid move
+                moves[col][left] = 1;
+            }
+            else{ // something is there
+                if (board[col][left].getColor() == 0 && color == 1){ // enemy piece
+                    moves[col][left] = 1; // there is a piece which can be captured, so it is a valid move
+                    break; // but you can't go any further, so break
+                }
+                else if (board[col][left].getColor() == 0 && color == 0){ // friendly piece
+                    break; // can't go any further
+                }
+                if (board[col][left].getColor() == 1 && color == 0){
+                    moves[col][left] = 1; // there is a piece which can be captured, so it is a valid move
+                    break; // but you can't go any further, so break
+                }
+                else if (board[col][left].getColor() == 1 && color == 1){
+                    break;
+                }
+            }
+        }
+
+        // up
+        for (int up = col; up > 0; up--){
+            if (board[col][up] == null){ // if nothing is there it is a valid move
+                moves[col][up] = 1;
+            }
+            else{ // something is there
+                if (board[col][up].getColor() == 0 && color == 1){ // enemy piece
+                    moves[col][up] = 1; // there is a piece which can be captured, so it is a valid move
+                    break; // but you can't go any further, so break
+                }
+                else if (board[col][up].getColor() == 0 && color == 0){ // friendly piece
+                    break; // can't go any further
+                }
+                if (board[col][up].getColor() == 1 && color == 0){
+                    moves[col][up] = 1; // there is a piece which can be captured, so it is a valid move
+                    break; // but you can't go any further, so break
+                }
+                else if (board[col][up].getColor() == 1 && color == 1){
+                    break;
+                }
+            }
+        }
+
+
+        // down
+        for (int down = col; down < 7; down++){
+            if (board[col][down] == null){ // if nothing is there it is a valid move
+                moves[col][down] = 1;
+            }
+            else{ // something is there
+                if (board[col][down].getColor() == 0 && color == 1){ // enemy piece
+                    moves[col][down] = 1; // there is a piece which can be captured, so it is a valid move
+                    break; // but you can't go any further, so break
+                }
+                else if (board[col][down].getColor() == 0 && color == 0){ // friendly piece
+                    break; // can't go any further
+                }
+                if (board[col][down].getColor() == 1 && color == 0){
+                    moves[col][down] = 1; // there is a piece which can be captured, so it is a valid move
+                    break; // but you can't go any further, so break
+                }
+                else if (board[col][down].getColor() == 1 && color == 1){
+                    break;
+                }
+            }
+        }
+
+        return moves;
     }
 }
