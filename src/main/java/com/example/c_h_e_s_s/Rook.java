@@ -4,6 +4,10 @@ public class Rook extends Pieces{
     public Rook(int type, int color, int col, int row) {
         super(3, color, col, row);
     }
+    @Override
+    public int getColor() {
+        return super.getColor();
+    }
 
     @Override
     public Pieces[][] move(Pieces[][] board, int desiredCol, int desiredRow) {

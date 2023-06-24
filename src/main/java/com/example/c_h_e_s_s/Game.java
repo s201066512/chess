@@ -2,12 +2,19 @@
 - Draw pieces
 - Get pieces to move properly
     - Figure out how to get mouse input and get desired column and desired row from that
-    - Determine if a piece is valid
-- Display valid moves
+    - Determine if a move is valid
+    - Pawn
+    - Knight
+    - Bishop
+    - Rook
+    - Queen
+    - King
+- Alternate turns
 - Take pieces
 - Pawn promotion
 - Check/Checkmate detection
 - Castling
+- Display valid moves
 - En passant
 */
 
@@ -24,14 +31,14 @@ import java.io.FileNotFoundException;
 public class Game extends Application {
 
     // creating all the black pieces
-    Pawn blackPawn1 = new Pawn(0, 1, 1, 0);
-    Pawn blackPawn2 = new Pawn(0, 1, 1, 1);
-    Pawn blackPawn3 = new Pawn(0, 1, 1, 2);
-    Pawn blackPawn4 = new Pawn(0, 1, 1, 3);
-    Pawn blackPawn5 = new Pawn(0, 1, 1, 4);
-    Pawn blackPawn6 = new Pawn(0, 1, 1, 5);
-    Pawn blackPawn7 = new Pawn(0, 1, 1, 6);
-    Pawn blackPawn8 = new Pawn(0, 1, 1, 7);
+    Pawn blackPawn1 = new Pawn(0, 1, 1, 0, false);
+    Pawn blackPawn2 = new Pawn(0, 1, 1, 1, false);
+    Pawn blackPawn3 = new Pawn(0, 1, 1, 2, false);
+    Pawn blackPawn4 = new Pawn(0, 1, 1, 3, false);
+    Pawn blackPawn5 = new Pawn(0, 1, 1, 4, false);
+    Pawn blackPawn6 = new Pawn(0, 1, 1, 5, false);
+    Pawn blackPawn7 = new Pawn(0, 1, 1, 6, false);
+    Pawn blackPawn8 = new Pawn(0, 1, 1, 7, false);
     Knight blackKnight1 = new Knight(1, 1, 0, 1);
     Knight blackKnight2 = new Knight(1, 1, 0, 6);
     Bishop blackBishop1 = new Bishop(2, 1, 0, 2);
@@ -42,14 +49,14 @@ public class Game extends Application {
     King blackKing = new King(5, 1, 0, 4);
 
     // white pieces
-    Pawn whitePawn1 = new Pawn(0, 0, 6, 0);
-    Pawn whitePawn2 = new Pawn(0, 0, 6, 1);
-    Pawn whitePawn3 = new Pawn(0, 0, 6, 2);
-    Pawn whitePawn4 = new Pawn(0, 0, 6, 3);
-    Pawn whitePawn5 = new Pawn(0, 0, 6, 4);
-    Pawn whitePawn6 = new Pawn(0, 0, 6, 5);
-    Pawn whitePawn7 = new Pawn(0, 0, 6, 6);
-    Pawn whitePawn8 = new Pawn(0, 0, 6, 7);
+    Pawn whitePawn1 = new Pawn(0, 0, 6, 0, false);
+    Pawn whitePawn2 = new Pawn(0, 0, 6, 1, false);
+    Pawn whitePawn3 = new Pawn(0, 0, 6, 2, false);
+    Pawn whitePawn4 = new Pawn(0, 0, 6, 3, false);
+    Pawn whitePawn5 = new Pawn(0, 0, 6, 4, false);
+    Pawn whitePawn6 = new Pawn(0, 0, 6, 5, false);
+    Pawn whitePawn7 = new Pawn(0, 0, 6, 6, false);
+    Pawn whitePawn8 = new Pawn(0, 0, 6, 7, false);
     Knight whiteKnight1 = new Knight(1, 0, 7, 1);
     Knight whiteKnight2 = new Knight(1, 0, 7, 6);
     Bishop whiteBishop1 = new Bishop(2, 0, 7, 2);
@@ -71,7 +78,7 @@ public class Game extends Application {
     int firstPieceRow;
     int secondPieceCol;
     int secondPieceRow;
-
+    int turn = 0;
     boolean selectFirstPiece = true;
     boolean selectSecondPiece = false;
 
@@ -191,15 +198,27 @@ public class Game extends Application {
                     firstPieceCol = 7;
                 }
                 if (board[firstPieceCol][firstPieceRow] != null){
-                    System.out.println("What you want to move " + "\n" + "Column: " + firstPieceCol + "\n" + "Row: " + firstPieceRow);
-                    selectFirstPiece = false;
-                    selectSecondPiece = true;
+                    if (turn == 0 && board[firstPieceCol][firstPieceRow].getColor() == 0){
+                        System.out.println("What you want to move " + "\n" + "Column: " + firstPieceCol + "\n" + "Row: " + firstPieceRow);
+                        selectFirstPiece = false;
+                        selectSecondPiece = true;
+                    }
+                    else if (turn == 1 && board[firstPieceCol][firstPieceRow].getColor() == 1){
+                        System.out.println("What you want to move " + "\n" + "Column: " + firstPieceCol + "\n" + "Row: " + firstPieceRow);
+                        selectFirstPiece = false;
+                        selectSecondPiece = true;
+                    }
+                    else{
+                        System.out.println("Wrong color");
+                    }
                 }
                 else{
                     System.out.println("There is no piece there");
                 }
             }
-            else{ // to select second piece's column and row
+
+            // choose where to move it to
+            else{
                 // first piece row selection
                 if (event.getSceneX() >= 0 && event.getSceneX() <= 100){
                     secondPieceRow = 0;
@@ -251,9 +270,89 @@ public class Game extends Application {
                 else{
                     secondPieceCol = 7;
                 }
-                    System.out.println("Where you want to move it to " + "\n" + "Column: " + secondPieceCol + "\n" + "Row: " + secondPieceRow);
-                    selectSecondPiece = false;
-                    selectFirstPiece = true;
+
+                // check if trying to move piece to spot occupied by own piece
+                if (board[secondPieceCol][secondPieceRow] != null){ // if piece is not null, check
+                    if (turn == 0 && board[secondPieceCol][secondPieceRow].getColor() == 0){ // white attempting to move to spot occupied by white
+                        System.out.println("Can't take own piece");
+                    }
+                    else if (turn == 1 && board[secondPieceCol][secondPieceRow].getColor() == 1){
+                        System.out.println("Can't take own piece");
+                    }
+                    else{ // this means that even though there is a piece, it is not your own piece so try to move
+                        System.out.println("Attempting to move piece to " + "\n" + "Column: " + secondPieceCol + "\n" + "Row: " + secondPieceRow);
+                        board = board[firstPieceCol][firstPieceRow].move(board, secondPieceCol, secondPieceRow); // actually update the board
+                        if (board[firstPieceCol][firstPieceRow] == null) { // did move
+
+                            // switch turn
+                            if (turn == 0){
+                                turn = 1;
+                            }
+                            else{
+                                turn = 0;
+                            }
+
+                            // redraw the board when pieces are moved
+                            pane.getChildren().clear();
+                            pane.getChildren().add(drawGrid()); // redraw grid
+
+                            for (Pieces[] pieces : board) {
+                                for (int j = 0; j < board.length; j++) {
+                                    if (pieces[j] != null) {
+                                        try {
+                                            pane.getChildren().add(pieces[j].draw());
+                                        } catch (FileNotFoundException e) {
+                                            throw new RuntimeException(e);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            System.out.println("Invalid move");
+                        }
+                    }
+                }
+
+
+                else{ // this means that there is no piece where you want to move
+                    // try to move the piece
+                    System.out.println("Attempting to move piece to " + "\n" + "Column: " + secondPieceCol + "\n" + "Row: " + secondPieceRow);
+                    board = board[firstPieceCol][firstPieceRow].move(board, secondPieceCol, secondPieceRow); // actually update the board
+                    if (board[firstPieceCol][firstPieceRow] == null) { // did move
+
+                        // switch turn
+                        if (turn == 0){
+                            turn = 1;
+                        }
+                        else{
+                            turn = 0;
+                        }
+
+                        // redraw the board when pieces are moved
+                        pane.getChildren().clear();
+                        pane.getChildren().add(drawGrid()); // redraw grid
+
+                        for (Pieces[] pieces : board) {
+                            for (int j = 0; j < board.length; j++) {
+                                if (pieces[j] != null) {
+                                    try {
+                                        pane.getChildren().add(pieces[j].draw());
+                                    } catch (FileNotFoundException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        System.out.println("Invalid move");
+                    }
+                }
+                // regardless of whether the move was valid, it makes more sense to go back to selecting a piece to move again
+                System.out.println("Which piece do you want to move?");
+                selectSecondPiece = false;
+                selectFirstPiece = true;
             }
         });
     }

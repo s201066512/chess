@@ -4,6 +4,10 @@ public class Knight extends Pieces{
     public Knight(int type, int color, int col, int row) {
         super(1, color, col, row);
     }
+    @Override
+    public int getColor() {
+        return super.getColor();
+    }
 
     @Override
     public Pieces[][] move(Pieces[][] board, int desiredCol, int desiredRow) {

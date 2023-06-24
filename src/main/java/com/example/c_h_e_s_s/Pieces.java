@@ -19,6 +19,11 @@ public abstract class Pieces {
         this.row = row;
     }
     public abstract Pieces[][] move(Pieces[][] board, int desiredCol, int desiredRow); // the position the player wants to move to
+
+    public int getColor() {
+        return color;
+    }
+
     public Group draw() throws FileNotFoundException {
         ImageView imageView = new ImageView();
         Group chessImages = new Group();

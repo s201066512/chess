@@ -4,6 +4,10 @@ public class King extends Pieces{
     public King(int type, int color, int col, int row) {
         super(5, color, col, row);
     }
+    @Override
+    public int getColor() {
+        return super.getColor();
+    }
 
     @Override
     public Pieces[][] move(Pieces[][] board, int desiredCol, int desiredRow) {
