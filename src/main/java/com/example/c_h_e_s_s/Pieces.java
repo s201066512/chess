@@ -24,6 +24,14 @@ public abstract class Pieces {
         return color;
     }
 
+    public int getCol() {
+        return col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
     public Group draw() throws FileNotFoundException {
         ImageView imageView = new ImageView();
         Group chessImages = new Group();

@@ -8,6 +8,15 @@ public class Knight extends Pieces{
     public int getColor() {
         return super.getColor();
     }
+    @Override
+    public int getCol() {
+        return super.getCol();
+    }
+
+    @Override
+    public int getRow() {
+        return super.getRow();
+    }
 
     @Override
     public Pieces[][] move(Pieces[][] board, int desiredCol, int desiredRow) {
