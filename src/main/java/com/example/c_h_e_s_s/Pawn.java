@@ -37,14 +37,16 @@ public class Pawn extends Pieces{
                 }
             }
             if (desiredCol == col + 1 && desiredRow == row){ // move 1 space
-                board[col][row] = null;
-                col = desiredCol;
-                row = desiredRow;
-                board[col][row] = this;
-                hasMoved = true;
-                return board;
+                if (board[col + 1][row] == null){ // make sure there's nothing there
+                    board[col][row] = null;
+                    col = desiredCol;
+                    row = desiredRow;
+                    board[col][row] = this;
+                    hasMoved = true;
+                    return board;
+                }
             }
-            if (desiredCol == col + 1){
+            if (desiredCol == col + 1){ // capturing
                 if (board[desiredCol][desiredRow] != null){
                     if (desiredRow == row + 1 || desiredRow == row - 1){
                         board[col][row] = null; // set old position to be empty
@@ -57,7 +59,7 @@ public class Pawn extends Pieces{
                 }
             }
         }
-        else{
+        else{ // white
             if (!hasMoved){ // move 2 spaces
                 if (desiredCol == col - 2 && desiredRow == row && board[col-1][row] == null){
                     board[col][row] = null; // set old position to be empty
@@ -69,12 +71,14 @@ public class Pawn extends Pieces{
                 }
             }
             if (desiredCol == col - 1 && desiredRow == row){ // move 1 space
-                board[col][row] = null;
-                col = desiredCol;
-                row = desiredRow;
-                board[col][row] = this;
-                hasMoved = true;
-                return board;
+                if (board[col - 1][row] == null){
+                    board[col][row] = null;
+                    col = desiredCol;
+                    row = desiredRow;
+                    board[col][row] = this;
+                    hasMoved = true;
+                    return board;
+                }
             }
             if (desiredCol == col - 1){
                 if (board[desiredCol][desiredRow] != null){

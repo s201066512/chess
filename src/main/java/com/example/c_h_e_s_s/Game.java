@@ -1,16 +1,16 @@
 /*
-- Draw pieces
+- Draw pieces x
 - Get pieces to move properly
-    - Figure out how to get mouse input and get desired column and desired row from that
-    - Determine if a move is valid
-    - Pawn
+    - Figure out how to get mouse input and get desired column and desired row from that x
+    - Determine if a move is valid x
+    - Pawn x
     - Knight
-    - Bishop
-    - Rook
+    - Bishop x
+    - Rook x
     - Queen
     - King
-- Alternate turns
-- Take pieces
+- Alternate turns x
+- Take pieces x
 - Pawn promotion
 - Check/Checkmate detection
 - Castling
@@ -148,6 +148,9 @@ public class Game extends Application {
 
         pane.setOnMouseClicked(event -> {
             if (selectFirstPiece){
+                for (int i = 0; i < 10; i++){
+                    System.out.println("\n");
+                }
                 // first piece row selection
                 if (event.getSceneX() >= 0 && event.getSceneX() <= 100){
                     firstPieceRow = 0;
