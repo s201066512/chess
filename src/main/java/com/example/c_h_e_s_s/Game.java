@@ -2,6 +2,8 @@
 - Draw pieces
 - Get pieces to move properly
     - Figure out how to get mouse input and get desired column and desired row from that
+    - Determine if a piece is valid
+- Display valid moves
 - Take pieces
 - Pawn promotion
 - Check/Checkmate detection
@@ -64,6 +66,15 @@ public class Game extends Application {
     final double LENGTH = 800;
     final double HEIGHT = 800;
 
+    // method variables used for onclick event
+    int firstPieceCol;
+    int firstPieceRow;
+    int secondPieceCol;
+    int secondPieceRow;
+
+    boolean selectFirstPiece = true;
+    boolean selectSecondPiece = false;
+
     @Override
     public void start(Stage stage) throws FileNotFoundException {
 
@@ -124,6 +135,127 @@ public class Game extends Application {
             }
         }
         // redraw pieces
+
+
+        pane.setOnMouseClicked(event -> {
+            if (selectFirstPiece){
+                // first piece row selection
+                if (event.getSceneX() >= 0 && event.getSceneX() <= 100){
+                    firstPieceRow = 0;
+                }
+                else if (event.getSceneX() > 100 && event.getSceneX() <= 200){
+                    firstPieceRow = 1;
+                }
+                else if (event.getSceneX() > 200 && event.getSceneX() <= 300){
+                    firstPieceRow = 2;
+                }
+                else if (event.getSceneX() > 300 && event.getSceneX() <= 400){
+                    firstPieceRow = 3;
+                }
+                else if (event.getSceneX() > 400 && event.getSceneX() <= 500){
+                    firstPieceRow = 4;
+                }
+                else if (event.getSceneX() > 500 && event.getSceneX() <= 600){
+                    firstPieceRow = 5;
+                }
+                else if (event.getSceneX() > 600 && event.getSceneX() <= 700){
+                    firstPieceRow = 6;
+                }
+                else{
+                    firstPieceRow = 7;
+                }
+
+                // column selection
+                if (event.getSceneY() >= 0 && event.getSceneY() <= 100){
+                    firstPieceCol = 0;
+                }
+                else if (event.getSceneY() > 100 && event.getSceneY() <= 200){
+                    firstPieceCol = 1;
+                }
+                else if (event.getSceneY() > 200 && event.getSceneY() <= 300){
+                    firstPieceCol = 2;
+                }
+                else if (event.getSceneY() > 300 && event.getSceneY() <= 400){
+                    firstPieceCol = 3;
+                }
+                else if (event.getSceneY() > 400 && event.getSceneY() <= 500){
+                    firstPieceCol = 4;
+                }
+                else if (event.getSceneY() > 500 && event.getSceneY() <= 600){
+                    firstPieceCol = 5;
+                }
+                else if (event.getSceneY() > 600 && event.getSceneY() <= 700){
+                    firstPieceCol = 6;
+                }
+                else{
+                    firstPieceCol = 7;
+                }
+                if (board[firstPieceCol][firstPieceRow] != null){
+                    System.out.println("What you want to move " + "\n" + "Column: " + firstPieceCol + "\n" + "Row: " + firstPieceRow);
+                    selectFirstPiece = false;
+                    selectSecondPiece = true;
+                }
+                else{
+                    System.out.println("There is no piece there");
+                }
+            }
+            else{ // to select second piece's column and row
+                // first piece row selection
+                if (event.getSceneX() >= 0 && event.getSceneX() <= 100){
+                    secondPieceRow = 0;
+                }
+                else if (event.getSceneX() > 100 && event.getSceneX() <= 200){
+                    secondPieceRow = 1;
+                }
+                else if (event.getSceneX() > 200 && event.getSceneX() <= 300){
+                    secondPieceRow = 2;
+                }
+                else if (event.getSceneX() > 300 && event.getSceneX() <= 400){
+                    secondPieceRow = 3;
+                }
+                else if (event.getSceneX() > 400 && event.getSceneX() <= 500){
+                    secondPieceRow = 4;
+                }
+                else if (event.getSceneX() > 500 && event.getSceneX() <= 600){
+                    secondPieceRow = 5;
+                }
+                else if (event.getSceneX() > 600 && event.getSceneX() <= 700){
+                    secondPieceRow = 6;
+                }
+                else{
+                    secondPieceRow = 7;
+                }
+
+                // column selection
+                if (event.getSceneY() >= 0 && event.getSceneY() <= 100){
+                    secondPieceCol = 0;
+                }
+                else if (event.getSceneY() > 100 && event.getSceneY() <= 200){
+                    secondPieceCol = 1;
+                }
+                else if (event.getSceneY() > 200 && event.getSceneY() <= 300){
+                    secondPieceCol = 2;
+                }
+                else if (event.getSceneY() > 300 && event.getSceneY() <= 400){
+                    secondPieceCol = 3;
+                }
+                else if (event.getSceneY() > 400 && event.getSceneY() <= 500){
+                    secondPieceCol = 4;
+                }
+                else if (event.getSceneY() > 500 && event.getSceneY() <= 600){
+                    secondPieceCol = 5;
+                }
+                else if (event.getSceneY() > 600 && event.getSceneY() <= 700){
+                    secondPieceCol = 6;
+                }
+                else{
+                    secondPieceCol = 7;
+                }
+                    System.out.println("Where you want to move it to " + "\n" + "Column: " + secondPieceCol + "\n" + "Row: " + secondPieceRow);
+                    selectSecondPiece = false;
+                    selectFirstPiece = true;
+            }
+        });
     }
 
     public static void main(String[] args) {
