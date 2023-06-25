@@ -3,7 +3,6 @@ package com.example.c_h_e_s_s;
 import javafx.scene.Group;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

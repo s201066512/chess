@@ -103,6 +103,99 @@ public class Bishop extends Pieces{
     }
     public int[][] validMoves(Pieces[][] board){
         int[][] moves = new int[8][8];
+        int count = 0;
+        // up left
+        while (col - count > 0 && row - count > 0){ // while you can still move up and left
+            if (board[col - count][row - count] == null){ // check if the tile is empty
+                moves[col - count][row - count] = 1; // if it is then it is a valid move
+            }
+            else{ // there is a piece on that spot
+                if (board[col - count][row - count].getColor() == 0 && color == 1){ // it's an enemy piece
+                    moves[col - count][row - count] = 1; // you can capture it
+                    break; // but not go any further
+                }
+                else if (board[col - count][row - count].getColor() == 0 && color == 0){ // it's a friendly piece
+                    break; // you can't capture it or go any further
+                }
+                else if (board[col - count][row - count].getColor() == 1 && color == 0){
+                    moves[col - count][row - count] = 1; // can capture it
+                    break; // can't go any further
+                }
+                else if (board[col - count][row - count].getColor() == 1 && color == 1){
+                    break; // can't go any further
+                }
+            }
+        }
+
+        // up right
+        count = 0;
+        while (col - count > 0 && row + count < 7){ // while you can still move up and left
+            if (board[col - count][row + count] == null){ // check if the tile is empty
+                moves[col - count][row + count] = 1; // if it is then it is a valid move
+            }
+            else{ // there is a piece on that spot
+                if (board[col - count][row + count].getColor() == 0 && color == 1){ // it's an enemy piece
+                    moves[col - count][row + count] = 1; // you can capture it
+                    break; // but not go any further
+                }
+                else if (board[col - count][row + count].getColor() == 0 && color == 0){ // it's a friendly piece
+                    break; // you can't capture it or go any further
+                }
+                else if (board[col - count][row + count].getColor() == 1 && color == 0){
+                    moves[col - count][row + count] = 1; // can capture it
+                    break; // can't go any further
+                }
+                else if (board[col - count][row + count].getColor() == 1 && color == 1){
+                    break; // can't go any further
+                }
+            }
+        }
+
+        // down left
+        while (col + count < 7 && row - count > 0){ // while you can still move up and left
+            if (board[col + count][row - count] == null){ // check if the tile is empty
+                moves[col + count][row - count] = 1; // if it is then it is a valid move
+            }
+            else{ // there is a piece on that spot
+                if (board[col + count][row - count].getColor() == 0 && color == 1){ // it's an enemy piece
+                    moves[col + count][row - count] = 1; // you can capture it
+                    break; // but not go any further
+                }
+                else if (board[col + count][row - count].getColor() == 0 && color == 0){ // it's a friendly piece
+                    break; // you can't capture it or go any further
+                }
+                else if (board[col + count][row - count].getColor() == 1 && color == 0){
+                    moves[col + count][row - count] = 1; // can capture it
+                    break; // can't go any further
+                }
+                else if (board[col + count][row - count].getColor() == 1 && color == 1){
+                    break; // can't go any further
+                }
+            }
+        }
+
+        // down right
+        while (col + count < 7 && row + count < 7){ // while you can still move up and left
+            if (board[col + count][row + count] == null){ // check if the tile is empty
+                moves[col + count][row + count] = 1; // if it is then it is a valid move
+            }
+            else{ // there is a piece on that spot
+                if (board[col + count][row + count].getColor() == 0 && color == 1){ // it's an enemy piece
+                    moves[col + count][row + count] = 1; // you can capture it
+                    break; // but not go any further
+                }
+                else if (board[col + count][row + count].getColor() == 0 && color == 0){ // it's a friendly piece
+                    break; // you can't capture it or go any further
+                }
+                else if (board[col + count][row + count].getColor() == 1 && color == 0){
+                    moves[col + count][row + count] = 1; // can capture it
+                    break; // can't go any further
+                }
+                else if (board[col + count][row + count].getColor() == 1 && color == 1){
+                    break; // can't go any further
+                }
+            }
+        }
         return moves;
     }
 }

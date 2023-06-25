@@ -132,19 +132,7 @@ public class Game extends Application {
         stage.setScene(scene);
         stage.show();
 
-        // after every move
-        pane.getChildren().clear(); // clear board
-        // move pieces
-        pane.getChildren().add(drawGrid()); // redraw grid
-        for (Pieces[] pieces : board) {
-            for (int j = 0; j < board.length; j++) {
-                if (pieces[j] != null) {
-                    pane.getChildren().add(pieces[j].draw());
-                }
-            }
-        }
-        // redraw pieces
-
+        display();
 
         pane.setOnMouseClicked(event -> {
             if (selectFirstPiece){
