@@ -27,59 +27,59 @@ public class Rook extends Pieces{
 
         if (desiredCol == col && desiredRow != row){ // moving left or right
             if (desiredRow > row){ // moving right
-                for (int right = row + 1; right <= desiredRow; right++){ // move right one space at a time
+                for (int right = row; right < desiredRow; right++){ // move right one space at a time
                     if (board[col][right] != null){ // invalid move, because something was in the way
                         return board;
                     }
-                    // at this point it has "made it" to the desired position
-                    board[col][row] = null;
-                    col = desiredCol;
-                    row = desiredRow;
-                    board[col][row] = this;
-                    return board;
                 }
+                // at this point it has "made it" to the desired position
+                board[col][row] = null;
+                col = desiredCol;
+                row = desiredRow;
+                board[col][row] = this;
+                return board;
             }
             else{ // moving left
-                for (int left = row - 1; left >= desiredRow; left--){ // move right one space at a time
+                for (int left = row; left > desiredRow; left--){ // move right one space at a time
                     if (board[col][left] != null){ // invalid move, because something was in the way
                         return board;
                     }
-                    // at this point it has "made it" to the desired position
-                    board[col][row] = null;
-                    col = desiredCol;
-                    row = desiredRow;
-                    board[col][row] = this;
-                    return board;
                 }
+                // at this point it has "made it" to the desired position
+                board[col][row] = null;
+                col = desiredCol;
+                row = desiredRow;
+                board[col][row] = this;
+                return board;
             }
         }
 
         if (desiredCol != col && desiredRow == row){ // moving up or down
             if (desiredCol > col){ // moving down
-                for (int down = col + 1; down <= desiredCol; down++){ // move right one space at a time
+                for (int down = col; down < desiredCol; down++){ // move right one space at a time
                     if (board[down][row] != null){ // invalid move, because something was in the way
                         return board;
                     }
-                    // at this point it has "made it" to the desired position
-                    board[col][row] = null;
-                    col = desiredCol;
-                    row = desiredRow;
-                    board[col][row] = this;
-                    return board;
                 }
+                // at this point it has "made it" to the desired position
+                board[col][row] = null;
+                col = desiredCol;
+                row = desiredRow;
+                board[col][row] = this;
+                return board;
             }
             else{ // moving up
-                for (int up = col - 1; up >= desiredCol; up--){ // move right one space at a time
+                for (int up = col; up > desiredCol; up--){ // move right one space at a time
                     if (board[up][row] != null){ // invalid move, because something was in the way
                         return board;
                     }
-                    // at this point it has "made it" to the desired position
-                    board[col][row] = null;
-                    col = desiredCol;
-                    row = desiredRow;
-                    board[col][row] = this;
-                    return board;
                 }
+                // at this point it has "made it" to the desired position
+                board[col][row] = null;
+                col = desiredCol;
+                row = desiredRow;
+                board[col][row] = this;
+                return board;
             }
         }
         return board;

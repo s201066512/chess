@@ -86,7 +86,7 @@ public class Game extends Application {
     boolean selectSecondPiece = false;
 
     @Override
-    public void start(Stage stage) throws FileNotFoundException {
+    public void start(Stage stage) {
 
         // populating the board
 
@@ -416,6 +416,7 @@ public class Game extends Application {
             }
         }
     }
+
     private void display(){
         pane.getChildren().clear();
         pane.getChildren().add(drawGrid()); // redraw grid
@@ -423,7 +424,6 @@ public class Game extends Application {
             for (int j = 0; j < board.length; j++) {
                 if (pieces[j] != null) {
                     try {
-
                         pane.getChildren().add(pieces[j].draw());
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);

@@ -33,7 +33,7 @@ public class Bishop extends Pieces{
 
         // up left
         if (desiredCol < col && desiredRow < row){
-            for (int i = 1; i < Math.abs(desiredCol - col) - 1; i++){ // Math.abs(desiredCol - col) could be row as well, but they're already equal if this is reached
+            for (int i = 1; i < Math.abs(desiredCol - col); i++){ // Math.abs(desiredCol - col) could be row as well, but they're already equal if this is reached
                 if (board[col - i][row - i] != null){ // there is a piece in the way
                     return board; // invalid
                 }
@@ -49,7 +49,7 @@ public class Bishop extends Pieces{
 
         // up right
         if (desiredCol < col && desiredRow >  row){
-            for (int i = 1; i < Math.abs(desiredCol - col) - 1; i++){ // Math.abs(desiredCol - col) could be row as well, but they're already equal if this is reached
+            for (int i = 1; i < Math.abs(desiredCol - col); i++){ // Math.abs(desiredCol - col) could be row as well, but they're already equal if this is reached
                 // col down
                 // row up
                 if (board[col - i][row + i] != null){ // there is a piece in the way
@@ -67,7 +67,7 @@ public class Bishop extends Pieces{
 
         // down left
         if (desiredCol > col && desiredRow < row){
-            for (int i = 1; i < Math.abs(desiredCol - col) - 1; i++){ // Math.abs(desiredCol - col) could be row as well, but they're already equal if this is reached
+            for (int i = 1; i < Math.abs(desiredCol - col); i++){ // Math.abs(desiredCol - col) could be row as well, but they're already equal if this is reached
                 // col up
                 // row down
                 if (board[col + i][row - i] != null){ // there is a piece in the way
@@ -85,7 +85,7 @@ public class Bishop extends Pieces{
 
         // down right
         if (desiredCol > col && desiredRow > row){
-            for (int i = 1; i < Math.abs(desiredCol - col) - 1; i++){ // Math.abs(desiredCol - col) could be row as well, but they're already equal if this is reached
+            for (int i = 1; i < Math.abs(desiredCol - col); i++){ // Math.abs(desiredCol - col) could be row as well, but they're already equal if this is reached
                 // col up
                 // row down
                 if (board[col + i][row + i] != null){ // there is a piece in the way
